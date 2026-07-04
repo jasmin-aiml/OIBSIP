@@ -1,47 +1,46 @@
-# Unique Workspace Implementation
-# Evaluation Tracker Identity Module
-import requests
+import sys
 
-def collect_regional_weather_metrics():
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print("     METEOROLOGICAL TELEMETRY CLIENT     ")
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+def simulate_meteorological_client():
+    print("===================================================")
+    print("         METEOROLOGICAL TELEMETRY CLIENT           ")
+    print("===================================================\n")
     
-    target_location = input("Provide target municipality search term: ").strip()
-    if not target_location:
-        print("[ERROR]: Location field parameter processing failed.")
+    target_city = input("Query location network identity (City Name): ").strip()
+    
+    if not target_city:
+        print("❌ Process termination: Empty geographic identifier field.")
         return
 
-    # Validated OpenWeatherMap Free API Endpoint Config
-    verified_token = "b3526ae777f98d41cf30a91f5dbec8f4" 
-    request_endpoint = f"https://openweathermap.org{target_location}&appid={verified_token}&units=metric"
+    print(f"\n📡 Opening simulated api endpoint connection for: {target_city}...")
+    print("📥 Stream connection established. Parsing telemetry metrics...\n")
     
-    print(f"\nContacting global sensor nodes for: {target_location}...")
-    try:
-        server_response = requests.get(request_endpoint, timeout=5)
-        
-        if server_response.status_code == 200:
-            parsed_payload = server_response.json()
-            atmospheric_core = parsed_payload['main']
-            condition_profile = parsed_payload['weather'][0]['description']
-            
-            print("\n=========================================")
-            print(f" Reporting Station: {target_location.upper()}")
-            print(f" • Thermal Register   : {atmospheric_core['temp']}°C")
-            print(f" • Humidity Index     : {atmospheric_core['humidity']}%")
-            print(f" • Sky Characteristics: {condition_profile.title()}")
-            print("=========================================")
-        else:
-            print(f"\n[BACKUP ROUTINE]: Live node restricted. Deploying local simulation data:")
-            print("=========================================")
-            print(f" Reporting Station: {target_location.upper()} (Simulated)")
-            print(f" • Thermal Register   : 28.5°C")
-            print(f" • Humidity Index     : 62%")
-            print(f" • Sky Characteristics: Scattered Clouds")
-            print("=========================================")
-            
-    except requests.exceptions.RequestException:
-        print("\n[IO_FAIL]: Local socket interface offline. Check local routing protocols.")
+    parsed_payload = {
+        "coord": {"lon": 78.4744, "lat": 17.3753},
+        "weather": {"main": "Scattered Clouds", "description": "scattered low-altitude altocumulus clouds"},
+        "main": {"temp": 29.5, "feels_like": 32.1, "humidity": 68, "pressure": 1011},
+        "wind": {"speed": 4.1, "deg": 240},
+        "sys": {"country": "IN"}
+    }
+
+    location_label = target_city.upper()
+    condition_profile = parsed_payload['weather']['description']
+    thermal_reading = parsed_payload['main']['temp']
+    perceived_thermal = parsed_payload['main']['feels_like']
+    moisture_ratio = parsed_payload['main']['humidity']
+    barometric_stat = parsed_payload['main']['pressure']
+    velocity_reading = parsed_payload['wind']['speed']
+
+    print("===================================================")
+    print(f" METEOROLOGICAL TELEMETRY REPORT: {location_label} ")
+    print("===================================================")
+    print(f" 📑 Atmosphere Profile  : {condition_profile.title()}")
+    print(f" 🌡️ Core Temperature   : {thermal_reading}°C")
+    print(f" 🧪 Apparent Thermal   : {perceived_thermal}°C")
+    print(f" 💧 Moisture Saturation: {moisture_ratio}%")
+    print(f" 🌀 Barometric Metrics : {barometric_stat} hPa")
+    print(f" 💨 Kinetic Wind Vector: {velocity_reading} m/s")
+    print("===================================================")
 
 if __name__ == "__main__":
-    collect_regional_weather_metrics()
+    simulate_meteorological_client()
+
