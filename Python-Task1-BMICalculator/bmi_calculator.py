@@ -17,7 +17,7 @@ def execute_health_index_calc():
 
     computed_bmi = input_mass_kg / (input_height_m ** 2)
     print("\n---------------------------------------------------")
-    print(f"📊 METRIC COMPUTATION ANALYSIS RESULTS")
+    print("|📊 METRIC COMPUTATION ANALYSIS RESULTS|")
     print(f"🎯 Calculated BMI Value: {computed_bmi:.2f}")
     
     if computed_bmi < 18.5:
