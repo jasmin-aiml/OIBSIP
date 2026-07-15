@@ -1,5 +1,3 @@
-import sys
-
 def simulate_meteorological_client():
     print("===================================================")
     print("         METEOROLOGICAL TELEMETRY CLIENT           ")
